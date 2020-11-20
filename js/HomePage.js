@@ -1,11 +1,14 @@
+let employeePayrollList;
 window.addEventListener('DOMContentLoaded', (event) => {
+    employeePayrollList = getEmployeePayrollDataFromStorage();
+    document.querySelector('.emp-count').textContent = employeePayrollList.length;
     createInnerHtml();
 });
 
 const createInnerHtml = () => {
     const headerHtml = "<tr><th></th><th>Name</th><th>Gender</th><th>Department</th><th>Salary</th><th>StartDate</th><th>Actions</th></tr>";
     let innerHtml = `${headerHtml}`;
-    let employeePayrollList =  createEmployeePayrollJSON();
+    if(employeePayrollList.length == 0) return;
     for(const empPayrollData of employeePayrollList){
         innerHtml = `${innerHtml}
         <tr> 
@@ -25,41 +28,12 @@ const createInnerHtml = () => {
     document.querySelector('#table-display').innerHTML = innerHtml;
 }  
 const getDeptHtml = (deptList) => {
-    let deptHtml ='';
+    let deptHtml =``;
     for (const dept of deptList){
         deptHtml = `${deptHtml}<div class = "dept-label">${dept}</div>`;
     }
     return deptHtml;
 }
-
-
-createEmployeePayrollJSON = () =>{
-    let employeePayrollList = [
-        {
-            _name : 'Shivam',
-            _gender: 'Male',
-            _department: [
-                'HR',
-                'Finance'
-            ],
-            _salary: '400000',
-            _startDate: '1 November 2020',
-            _note: '',
-            _id: new Date().getTime(),
-            _profilePic:  '../assets/profile-images/Ellipse -3.png'
-        },
-        {
-            _name : 'Nadal',
-            _gender: 'Male',
-            _department: [
-                'Engineering',
-            ],
-            _salary: '400000',
-            _startDate: '1 November 2020',
-            _note: '',
-            _id: new Date().getTime(),
-            _profilePic:  '../assets/profile-images/Ellipse -5.png'
-        }
-    ];
-    return employeePayrollList;
+const getEmployeePayrollDataFromStorage = () =>{
+    return localStorage.getItem('EmployeePayrollList') ? JSON.parse(localStorage.getItem('EmployeePayrollList')) : [];
 } 
