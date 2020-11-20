@@ -100,3 +100,20 @@ label{
     border-radius: 4px;
     resize: vertical;
 } 
+
+.profile-radio-content{
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-radio-content > label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile{
+    margin-left: 12px;
+    border-radius: 50%;
+    width: 40px;
+}
