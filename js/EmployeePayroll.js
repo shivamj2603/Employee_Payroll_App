@@ -34,7 +34,7 @@ class EmployeePayrollData {
 
     get note() { return this._note; }
     set note(note) {
-        this.note = note;
+        this._note = note;
     }
 
     get startDate() { return this._startDate }
@@ -53,9 +53,9 @@ class EmployeePayrollData {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
         const empDate = this.startDate === undefined ? "undefined" :
             this.startDate.toLocaleDateString("en-US", options);
-        return "id = " + this.id + ", name = " + this.name + ", gender=" + this.gender +
-            ", profilePic=" + this.profilePic + ", department=" + this.department + ", salary = "
-            + this.salary + ", start date = " + empDate + ", note=" + this.note;
+        return "id = " + this._id + ", name = " + this._name + ", gender=" + this._gender +
+            ", profilePic=" + this._profilePic + ", department=" + this._department + ", salary = "
+            + this._salary + ", start date = " + empDate + ", note=" + this._note;
     }
 }
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -100,9 +100,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
 const save = () => {
     try{
         let employeePayrollData = createEmployeePayrollData();
+        createAndUpdateStorage(employeePayrollData);
     }catch(e){
         return;
     }
+}
+function createAndUpdateStorage(employeePayrollData){
+    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+    if(employeePayrollList != undefined){
+        employeePayrollList.push(employeePayrollData);
+    } else{
+        employeePayrollList = [employeePayrollData];
+    }
+    alert(employeePayrollList.toString());
+    localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
 }
 //Populating the employee payroll object
 const createEmployeePayrollData = () => {
