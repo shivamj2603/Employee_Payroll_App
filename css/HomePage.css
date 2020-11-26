@@ -42,7 +42,7 @@ html body{
 
 *{
     box-sizing: border-box;
-}  
+}
 
 .main-content{
     display: flex;
@@ -92,7 +92,7 @@ html body{
     outline: none;
     cursor: pointer;
     text-decoration: none;
-}  
+}
 
 .table-main{
     width: 80%;
@@ -142,11 +142,11 @@ td:first-child{
     align-items: center;
 }
 
-td > img:first-child{
+td img:first-child{
     margin-right: 10px;
 }
 
-td > img{
+td img{
     cursor: pointer;
 }
 
